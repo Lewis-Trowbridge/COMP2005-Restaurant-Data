@@ -1,6 +1,8 @@
 package com.restaurants.models;
 
+import java.util.ArrayList;
+
 public class Restaurants {
 
-    public Restaurant[] restaurants;
+    public ArrayList<Restaurant> restaurants;
 }
