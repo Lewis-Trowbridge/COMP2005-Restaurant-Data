@@ -15,12 +15,15 @@ import java.util.ArrayList;
 public class APIAccessor implements IAPIAccessor {
 
     final private HttpClient client;
+    final private ObjectMapper mapper;
 
     public APIAccessor() {
         client = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_1_1)
                 .followRedirects(HttpClient.Redirect.NORMAL)
                 .build();
+
+        mapper = new ObjectMapper();
     }
 
     @Override
@@ -30,7 +33,6 @@ public class APIAccessor implements IAPIAccessor {
                 .build();
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            ObjectMapper mapper = new ObjectMapper();
             Restaurants restaurants = mapper.readValue(response.body(), Restaurants.class);
             return restaurants.restaurants;
         } catch (IOException | InterruptedException e) {
