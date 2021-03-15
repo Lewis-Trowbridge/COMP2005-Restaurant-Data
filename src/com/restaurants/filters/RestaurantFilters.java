@@ -6,8 +6,16 @@ import java.util.ArrayList;
 
 public class RestaurantFilters {
 
-    public ArrayList<Restaurant> filterRestaurantsByCuisine(ArrayList<Restaurant> restaurants, String cusine){
-        return null;
+    public ArrayList<Restaurant> filterRestaurantsByCuisine(ArrayList<Restaurant> restaurants, String cuisine){
+        ArrayList<Restaurant> restaurantsCopy = new ArrayList<>();
+
+        for (Restaurant currentRestaurant: restaurants) {
+            if (currentRestaurant.getCuisineType().equals(cuisine)){
+                restaurantsCopy.add(currentRestaurant);
+            }
+        }
+
+        return restaurantsCopy;
     }
 
 }
