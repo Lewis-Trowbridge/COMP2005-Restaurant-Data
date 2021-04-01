@@ -1,6 +1,5 @@
 package com.restaurants.web;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.restaurants.models.Restaurant;
 import com.restaurants.models.Restaurants;

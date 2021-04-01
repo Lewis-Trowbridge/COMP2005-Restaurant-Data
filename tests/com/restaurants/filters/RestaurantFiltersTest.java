@@ -58,6 +58,38 @@ public class RestaurantFiltersTest {
         assertEquals(emptyRestaurants, filteredRestaurants);
     }
 
+    @Test
+    public void filterRestaurantsByNeighbourhoodWithValidInputs() {
+        String testNeighbourhood = "Queens";
+        ArrayList<Restaurant> queensRestaurants = new ArrayList<>();
+        queensRestaurants.add(restaurants.get(8));
+        queensRestaurants.add(restaurants.get(9));
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByNeighbourhood(restaurants, testNeighbourhood);
+
+        assertEquals(queensRestaurants, filteredRestaurants);
+    }
+
+    @Test
+    public void filterRestaurantsByNeighbourhoodWithFakeNeighbourhood() {
+        String testNeighbourhood = "Chelsea";
+        ArrayList<Restaurant> emptyRestaurants = new ArrayList<>();
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByNeighbourhood(restaurants, testNeighbourhood);
+
+        assertEquals(emptyRestaurants, filteredRestaurants);
+    }
+
+    @Test
+    public void filterRestaurantsByNeighbourhoodWithEmptyString() {
+        String testNeighbourhood = "";
+        ArrayList<Restaurant> emptyRestaurants = new ArrayList<>();
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByNeighbourhood(restaurants, testNeighbourhood);
+
+        assertEquals(emptyRestaurants, filteredRestaurants);
+    }
+
     @After
     public void tearDown() throws Exception {
     }

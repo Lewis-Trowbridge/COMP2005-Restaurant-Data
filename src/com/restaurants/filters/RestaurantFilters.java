@@ -18,4 +18,8 @@ public class RestaurantFilters {
         return restaurantsCopy;
     }
 
+    public ArrayList<Restaurant> filterRestaurantsByNeighbourhood(ArrayList<Restaurant> restaurants, String neighbourhood){
+        return null;
+    }
+
 }
