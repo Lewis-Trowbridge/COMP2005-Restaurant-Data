@@ -19,7 +19,15 @@ public class RestaurantFilters {
     }
 
     public ArrayList<Restaurant> filterRestaurantsByNeighbourhood(ArrayList<Restaurant> restaurants, String neighbourhood){
-        return null;
+        ArrayList<Restaurant> restaurantsCopy = new ArrayList<>();
+
+        for (Restaurant currentRestaurant: restaurants) {
+            if (currentRestaurant.getNeighbourhood().equals(neighbourhood)){
+                restaurantsCopy.add(currentRestaurant);
+            }
+        }
+
+        return restaurantsCopy;
     }
 
 }
