@@ -43,4 +43,22 @@ public class Review {
     public void setComments(String comments) {
         this.comments = comments;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this){
+            return true;
+        }
+
+        if (!(obj instanceof Review)){
+            return false;
+        }
+
+        Review newReview = (Review)obj;
+
+        return this.name.equals(newReview.name)
+                && this.date.equals(newReview.date)
+                && this.rating == newReview.rating
+                && this.comments.equals(newReview.comments);
+    }
 }

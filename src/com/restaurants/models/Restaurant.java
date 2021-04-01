@@ -2,6 +2,8 @@ package com.restaurants.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Arrays;
+
 public class Restaurant {
     private int id;
     private String name;
@@ -102,5 +104,27 @@ public class Restaurant {
 
     public void setReviews(Review[] reviews) {
         this.reviews = reviews;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this){
+            return true;
+        }
+
+        if (!(obj instanceof Restaurant)){
+            return false;
+        }
+
+        Restaurant newRestaurant = (Restaurant)obj;
+
+        return this.id == newRestaurant.id && this.name.equals(newRestaurant.name)
+                && this.DOMHInspectionScore.equals(newRestaurant.DOMHInspectionScore)
+                && this.neighbourhood.equals(newRestaurant.neighbourhood)
+                && this.photograph.equals(newRestaurant.photograph) && this.address.equals(newRestaurant.address)
+                && this.latlng.equals(newRestaurant.latlng)
+                && this.cuisineType.equals(newRestaurant.cuisineType)
+                && this.openingHours.equals(newRestaurant.openingHours)
+                && Arrays.equals(this.reviews, newRestaurant.reviews);
     }
 }

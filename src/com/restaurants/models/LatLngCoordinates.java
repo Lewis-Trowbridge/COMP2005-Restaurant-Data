@@ -23,4 +23,20 @@ public class LatLngCoordinates {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this){
+            return true;
+        }
+
+        if (!(obj instanceof LatLngCoordinates)){
+            return false;
+        }
+
+        LatLngCoordinates newCoordinates = (LatLngCoordinates)obj;
+
+        return this.latitude == newCoordinates.latitude
+                && this.longitude == newCoordinates.longitude;
+    }
 }

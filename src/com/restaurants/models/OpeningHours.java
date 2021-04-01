@@ -73,4 +73,25 @@ public class OpeningHours {
     public void setSunday(String sunday) {
         this.sunday = sunday;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this){
+            return true;
+        }
+
+        if (!(obj instanceof OpeningHours)){
+            return false;
+        }
+
+        OpeningHours newHours = (OpeningHours)obj;
+
+        return this.monday.equals(newHours.monday)
+                && this.tuesday.equals(newHours.tuesday)
+                && this.wednesday.equals(newHours.wednesday)
+                && this.thursday.equals(newHours.thursday)
+                && this.friday.equals(newHours.friday)
+                && this.saturday.equals(newHours.saturday)
+                && this.sunday.equals(newHours.sunday);
+    }
 }
