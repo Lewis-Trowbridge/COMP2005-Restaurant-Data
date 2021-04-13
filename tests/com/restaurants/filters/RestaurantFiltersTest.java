@@ -90,6 +90,57 @@ public class RestaurantFiltersTest {
         assertEquals(emptyRestaurants, filteredRestaurants);
     }
 
+    @Test
+    public void filterRestaurantsByHourWithValidInputs() {
+        int testHour = 10;
+        ArrayList<Restaurant> expectedRestaurants = new ArrayList<>();
+        expectedRestaurants.add(restaurants.get(3));
+        expectedRestaurants.add(restaurants.get(4));
+        expectedRestaurants.add(restaurants.get(7));
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByHour(restaurants, testHour);
+
+        assertEquals(expectedRestaurants, filteredRestaurants);
+    }
+
+    @Test
+    public void filterRestaurantsByHourWithHourZero() {
+        int testHour = 0;
+        ArrayList<Restaurant> expectedRestaurants = new ArrayList<>();
+        expectedRestaurants.add(restaurants.get(0));
+        expectedRestaurants.add(restaurants.get(2));
+        expectedRestaurants.add(restaurants.get(3));
+        expectedRestaurants.add(restaurants.get(4));
+        expectedRestaurants.add(restaurants.get(9));
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByHour(restaurants, testHour);
+
+        assertEquals(expectedRestaurants, filteredRestaurants);
+    }
+
+    @Test
+    public void filterRestaurantByHourWithHour24(){
+        int testHour = 24;
+        ArrayList<Restaurant> expectedRestaurants = new ArrayList<>();
+        expectedRestaurants.add(restaurants.get(0));
+        expectedRestaurants.add(restaurants.get(2));
+        expectedRestaurants.add(restaurants.get(3));
+        expectedRestaurants.add(restaurants.get(4));
+        expectedRestaurants.add(restaurants.get(9));
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByHour(restaurants, testHour);
+
+        assertEquals(expectedRestaurants, filteredRestaurants);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void filterRestaurantsByHourWithInvalidHour(){
+        int testHour = 50;
+
+        filters.filterRestaurantsByHour(restaurants, testHour);
+    }
+
+
     @After
     public void tearDown() throws Exception {
     }

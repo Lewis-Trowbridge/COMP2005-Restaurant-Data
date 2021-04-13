@@ -30,4 +30,8 @@ public class RestaurantFilters {
         return restaurantsCopy;
     }
 
+    public ArrayList<Restaurant> filterRestaurantsByHour(ArrayList<Restaurant> restaurants, int hour) throws IllegalArgumentException {
+        return null;
+    }
+
 }
