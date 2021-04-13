@@ -34,4 +34,8 @@ public class RestaurantFilters {
         return null;
     }
 
+    public ArrayList<Restaurant> filterRestaurantsByDayOfWeek(ArrayList<Restaurant> restaurants, String dayOfWeek){
+        return null;
+    }
+
 }

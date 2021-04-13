@@ -119,7 +119,7 @@ public class RestaurantFiltersTest {
     }
 
     @Test
-    public void filterRestaurantByHourWithHour24(){
+    public void filterRestaurantsByHourWithHour24(){
         int testHour = 24;
         ArrayList<Restaurant> expectedRestaurants = new ArrayList<>();
         expectedRestaurants.add(restaurants.get(0));
@@ -138,6 +138,37 @@ public class RestaurantFiltersTest {
         int testHour = 50;
 
         filters.filterRestaurantsByHour(restaurants, testHour);
+    }
+
+    @Test
+    public void filterRestaurantsByDayOfWeekWithValidInputs() {
+        ArrayList<Restaurant> expectedRestaurants = (ArrayList<Restaurant>) restaurants.clone();
+        // Restaurant index 5 is the only restaurant not open on Monday, remove this to test filtering
+        expectedRestaurants.remove(5);
+        String testDay = "Monday";
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByDayOfWeek(restaurants, testDay);
+
+        assertEquals(expectedRestaurants, filteredRestaurants);
+    }
+
+    @Test
+    public void filterRestaurantsByDayOfWeekWithShortenedDay() {
+        ArrayList<Restaurant> expectedRestaurants = (ArrayList<Restaurant>) restaurants.clone();
+        // Restaurant index 5 is the only restaurant not open on Monday, remove this to test filtering
+        expectedRestaurants.remove(5);
+        String testDay = "Mon";
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByDayOfWeek(restaurants, testDay);
+
+        assertEquals(expectedRestaurants, filteredRestaurants);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void filterRestaurantsByDayOfWeekWithNonexistentDay() {
+        String testDay = "fidsuhfiduhiushfih";
+
+        filters.filterRestaurantsByDayOfWeek(restaurants, testDay);
     }
 
 
