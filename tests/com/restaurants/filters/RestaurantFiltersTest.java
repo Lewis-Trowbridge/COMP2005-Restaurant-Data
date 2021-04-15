@@ -171,6 +171,32 @@ public class RestaurantFiltersTest {
         filters.filterRestaurantsByDayOfWeek(restaurants, testDay);
     }
 
+    @Test
+    public void filterRestaurantsByAverageReviewsWithValidInputs() {
+        float testScore = 4.5f;
+        ArrayList<Restaurant> expectedRestaurants = new ArrayList<>();
+
+        expectedRestaurants.add(restaurants.get(9));
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByAverageReviews(restaurants, testScore);
+
+        assertEquals(expectedRestaurants, filteredRestaurants);
+
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void filterRestaurantsByAverageReviewsWithNegativeInput(){
+        float testScore = -3f;
+
+        filters.filterRestaurantsByAverageReviews(restaurants, testScore);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void filterRestaurantsByAverageReviewsWithTooHighInput(){
+        float testScore = 10f;
+
+        filters.filterRestaurantsByAverageReviews(restaurants, testScore);
+    }
 
     @After
     public void tearDown() throws Exception {

@@ -85,4 +85,8 @@ public class RestaurantFilters {
         return restaurantsCopy;
     }
 
+    public ArrayList<Restaurant> filterRestaurantsByAverageReviews(ArrayList<Restaurant> restaurants, float averageScore) throws IllegalArgumentException {
+        return null;
+    }
+
 }
