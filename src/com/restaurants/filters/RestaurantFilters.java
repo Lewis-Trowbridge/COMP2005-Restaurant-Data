@@ -2,6 +2,7 @@ package com.restaurants.filters;
 
 import com.restaurants.models.OpeningHours;
 import com.restaurants.models.Restaurant;
+import com.restaurants.models.Review;
 
 import java.util.ArrayList;
 
@@ -86,7 +87,26 @@ public class RestaurantFilters {
     }
 
     public ArrayList<Restaurant> filterRestaurantsByAverageReviews(ArrayList<Restaurant> restaurants, float averageScore) throws IllegalArgumentException {
-        return null;
-    }
+        ArrayList<Restaurant> restaurantsCopy = new ArrayList<>();
 
+        if (averageScore >= 0 && averageScore <= 5){
+
+            for (Restaurant currentRestaurant: restaurants) {
+                float totalScore = 0;
+                Review[] reviews = currentRestaurant.getReviews();
+                for (Review currentReview: reviews){
+                    totalScore += currentReview.getRating();
+                }
+                if (totalScore / reviews.length >= averageScore) {
+                    restaurantsCopy.add(currentRestaurant);
+                }
+            }
+            return restaurantsCopy;
+        }
+
+        else {
+            throw new IllegalArgumentException();
+        }
+
+    }
 }
