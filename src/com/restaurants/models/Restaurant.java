@@ -1,13 +1,14 @@
 package com.restaurants.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 import java.util.Arrays;
 
 public class Restaurant {
     private int id;
     private String name;
-    private String DOMHInspectionScore;
+    private Integer DOHMHInspectionScore;
     private String neighbourhood;
     private String photograph;
     private String address;
@@ -34,13 +35,18 @@ public class Restaurant {
         this.name = name;
     }
 
-    @JsonProperty("DOHMH_inspection_score")
-    public String getDOMHInspectionScore() {
-        return DOMHInspectionScore;
+    public int getDOHMHInspectionScore() {
+        return DOHMHInspectionScore;
     }
 
-    public void setDOMHInspectionScore(String DOMHInspectionScore) {
-        this.DOMHInspectionScore = DOMHInspectionScore;
+    @JsonSetter("DOHMH_inspection_score")
+    public void setDOHMHInspectionScore(String DOHMHInspectionScore) {
+        if (!(DOHMHInspectionScore.equals(""))){
+            this.DOHMHInspectionScore = Integer.parseInt(DOHMHInspectionScore);
+        }
+        else {
+            this.DOHMHInspectionScore = null;
+        }
     }
 
     @JsonProperty("neighborhood")
@@ -119,7 +125,7 @@ public class Restaurant {
         Restaurant newRestaurant = (Restaurant)obj;
 
         return this.id == newRestaurant.id && this.name.equals(newRestaurant.name)
-                && this.DOMHInspectionScore.equals(newRestaurant.DOMHInspectionScore)
+                && this.DOHMHInspectionScore == newRestaurant.DOHMHInspectionScore
                 && this.neighbourhood.equals(newRestaurant.neighbourhood)
                 && this.photograph.equals(newRestaurant.photograph) && this.address.equals(newRestaurant.address)
                 && this.latlng.equals(newRestaurant.latlng)
