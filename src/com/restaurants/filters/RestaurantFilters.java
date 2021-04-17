@@ -1,15 +1,24 @@
 package com.restaurants.filters;
 
+import com.restaurants.models.LatLngCoordinates;
 import com.restaurants.models.OpeningHours;
 import com.restaurants.models.Restaurant;
 import com.restaurants.models.Review;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.lang.Math;
 
 public class RestaurantFilters {
 
-    public ArrayList<Restaurant> filterRestaurantsByCuisine(ArrayList<Restaurant> restaurants, String cuisine){
+    private static final LatLngCoordinates manhattanHotel = new LatLngCoordinates(40.752831, -73.985748);
+    private static final LatLngCoordinates queensHotel = new LatLngCoordinates(40.753990, -73.949240);
+    private static final LatLngCoordinates brooklynHotel = new LatLngCoordinates(40.689510, -73.988100);
+    private static final String manhattanName = "Manhattan";
+    private static final String queensName = "Queens";
+    private static final String brooklynName = "Brooklyn";
+
+    public ArrayList<Restaurant> filterRestaurantsByCuisine(ArrayList<Restaurant> restaurants, String cuisine) {
         ArrayList<Restaurant> restaurantsCopy = new ArrayList<>();
 
         for (Restaurant currentRestaurant: restaurants) {
@@ -21,7 +30,7 @@ public class RestaurantFilters {
         return restaurantsCopy;
     }
 
-    public ArrayList<Restaurant> filterRestaurantsByNeighbourhood(ArrayList<Restaurant> restaurants, String neighbourhood){
+    public ArrayList<Restaurant> filterRestaurantsByNeighbourhood(ArrayList<Restaurant> restaurants, String neighbourhood) {
         ArrayList<Restaurant> restaurantsCopy = new ArrayList<>();
 
         for (Restaurant currentRestaurant: restaurants) {
@@ -37,7 +46,7 @@ public class RestaurantFilters {
         return null;
     }
 
-    public ArrayList<Restaurant> filterRestaurantsByDayOfWeek(ArrayList<Restaurant> restaurants, String dayOfWeek) throws IllegalArgumentException{
+    public ArrayList<Restaurant> filterRestaurantsByDayOfWeek(ArrayList<Restaurant> restaurants, String dayOfWeek) throws IllegalArgumentException {
         ArrayList<Restaurant> restaurantsCopy = new ArrayList<>();
 
         for (Restaurant currentRestaurant: restaurants) {
@@ -111,7 +120,7 @@ public class RestaurantFilters {
 
     }
 
-    public ArrayList<Restaurant> orderRestaurantsByDOHMHInspectionScore(ArrayList<Restaurant> restaurants) throws IndexOutOfBoundsException{
+    public ArrayList<Restaurant> orderRestaurantsByDOHMHInspectionScore(ArrayList<Restaurant> restaurants) throws IndexOutOfBoundsException {
 
         if (restaurants.size() > 0){
             ArrayList<Restaurant> restaurantsCopy = (ArrayList<Restaurant>) restaurants.clone();
@@ -124,5 +133,13 @@ public class RestaurantFilters {
         else {
             throw new IndexOutOfBoundsException();
         }
+    }
+
+    public ArrayList<Restaurant> orderRestaurantsByDistanceFromHotel(ArrayList<Restaurant> restaurants) throws IndexOutOfBoundsException {
+        return null;
+    }
+
+    private double GetDistanceBetweenTwoCoords(LatLngCoordinates coords1, LatLngCoordinates coords2){
+        return Math.sqrt(Math.pow((coords1.getLatitude() - coords2.getLatitude()), 2) + Math.pow((coords1.getLongitude() - coords2.getLongitude()), 2));
     }
 }
