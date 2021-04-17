@@ -200,6 +200,10 @@ public class RestaurantFiltersTest {
 
     @Test
     public void orderRestaurantsByDOHMHInspectionScoreWithValidInputs(){
+        // Remove null score
+        ArrayList<Restaurant> testRestaurants = (ArrayList<Restaurant>) restaurants.clone();
+        testRestaurants.remove(2);
+
         ArrayList<Restaurant> expectedRestaurants = new ArrayList<>();
         // Construct array list manually in order
         expectedRestaurants.add(restaurants.get(5));
@@ -212,7 +216,7 @@ public class RestaurantFiltersTest {
         expectedRestaurants.add(restaurants.get(1));
         expectedRestaurants.add(restaurants.get(6));
 
-        ArrayList<Restaurant> orderedRestaurants = filters.orderRestaurantsByDOHMHInspectionScore(restaurants);
+        ArrayList<Restaurant> orderedRestaurants = filters.orderRestaurantsByDOHMHInspectionScore(testRestaurants);
 
         assertEquals(expectedRestaurants, orderedRestaurants);
 
