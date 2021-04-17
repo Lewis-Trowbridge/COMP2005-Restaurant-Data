@@ -109,4 +109,8 @@ public class RestaurantFilters {
         }
 
     }
+
+    public ArrayList<Restaurant> orderRestaurantsByDOHMHInspectionScore(ArrayList<Restaurant> restaurants){
+        return null;
+    }
 }

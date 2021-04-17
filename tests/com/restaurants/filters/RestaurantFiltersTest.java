@@ -198,6 +198,40 @@ public class RestaurantFiltersTest {
         filters.filterRestaurantsByAverageReviews(restaurants, testScore);
     }
 
+    @Test
+    public void orderRestaurantsByDOHMHInspectionScoreWithValidInputs(){
+        ArrayList<Restaurant> expectedRestaurants = new ArrayList<>();
+        // Construct array list manually in order
+        expectedRestaurants.add(restaurants.get(5));
+        expectedRestaurants.add(restaurants.get(4));
+        expectedRestaurants.add(restaurants.get(3));
+        expectedRestaurants.add(restaurants.get(9));
+        expectedRestaurants.add(restaurants.get(0));
+        expectedRestaurants.add(restaurants.get(7));
+        expectedRestaurants.add(restaurants.get(8));
+        expectedRestaurants.add(restaurants.get(1));
+        expectedRestaurants.add(restaurants.get(6));
+
+        ArrayList<Restaurant> orderedRestaurants = filters.orderRestaurantsByDOHMHInspectionScore(restaurants);
+
+        assertEquals(expectedRestaurants, orderedRestaurants);
+
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void orderRestaurantsByDOHMHInspectionScoreWithNullScore(){
+        ArrayList<Restaurant> testRestaurants = (ArrayList<Restaurant>) restaurants.clone();
+
+        filters.orderRestaurantsByDOHMHInspectionScore(testRestaurants);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void orderRestaurantsByDOHMHInspectionScoreWithEmptyList(){
+        ArrayList<Restaurant> testRestaurants = new ArrayList<>();
+
+        filters.orderRestaurantsByDOHMHInspectionScore(testRestaurants);
+    }
+
     @After
     public void tearDown() throws Exception {
     }

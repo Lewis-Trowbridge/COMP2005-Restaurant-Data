@@ -35,7 +35,7 @@ public class Restaurant {
         this.name = name;
     }
 
-    public int getDOHMHInspectionScore() {
+    public Integer getDOHMHInspectionScore() {
         return DOHMHInspectionScore;
     }
 
