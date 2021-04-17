@@ -5,6 +5,7 @@ import com.restaurants.models.Restaurant;
 import com.restaurants.models.Review;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class RestaurantFilters {
 
@@ -110,7 +111,18 @@ public class RestaurantFilters {
 
     }
 
-    public ArrayList<Restaurant> orderRestaurantsByDOHMHInspectionScore(ArrayList<Restaurant> restaurants){
-        return null;
+    public ArrayList<Restaurant> orderRestaurantsByDOHMHInspectionScore(ArrayList<Restaurant> restaurants) throws IndexOutOfBoundsException{
+
+        if (restaurants.size() > 0){
+            ArrayList<Restaurant> restaurantsCopy = (ArrayList<Restaurant>) restaurants.clone();
+            restaurantsCopy.sort(
+                    Comparator.comparing(Restaurant::getDOHMHInspectionScore).reversed()
+            );
+
+            return restaurantsCopy;
+        }
+        else {
+            throw new IndexOutOfBoundsException();
+        }
     }
 }
