@@ -135,8 +135,33 @@ public class RestaurantFilters {
         }
     }
 
-    public ArrayList<Restaurant> orderRestaurantsByDistanceFromHotel(ArrayList<Restaurant> restaurants) throws IndexOutOfBoundsException {
-        return null;
+    public ArrayList<Restaurant> orderRestaurantsByDistanceFromHotel(ArrayList<Restaurant> restaurants) throws IndexOutOfBoundsException, NullPointerException {
+        ArrayList<RestaurantDistance> distances = new ArrayList<>();
+        for (Restaurant currentRestaurant: restaurants) {
+            switch (currentRestaurant.getNeighbourhood()){
+                case manhattanName:
+                    distances.add(new RestaurantDistance(currentRestaurant, GetDistanceBetweenTwoCoords(currentRestaurant.getLatlng(), manhattanHotel)));
+                    break;
+                case queensName:
+                    distances.add(new RestaurantDistance(currentRestaurant, GetDistanceBetweenTwoCoords(currentRestaurant.getLatlng(), queensHotel)));
+                    break;
+                case brooklynName:
+                    distances.add(new RestaurantDistance(currentRestaurant, GetDistanceBetweenTwoCoords(currentRestaurant.getLatlng(), brooklynHotel)));
+                    break;
+            }
+        }
+
+        distances.sort(
+                Comparator.comparing(RestaurantDistance::getDistance)
+        );
+
+        ArrayList<Restaurant> restaurantsCopy = new ArrayList<>();
+
+        for (RestaurantDistance currentRestaurant: distances) {
+            restaurantsCopy.add(currentRestaurant.getRestaurant());
+        }
+
+        return restaurantsCopy;
     }
 
     private double GetDistanceBetweenTwoCoords(LatLngCoordinates coords1, LatLngCoordinates coords2){
