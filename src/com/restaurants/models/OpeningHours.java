@@ -161,18 +161,9 @@ public class OpeningHours {
         ArrayList<LocalTime[]> openingTimes = new ArrayList<>();
         String[] timeStrings = allTimeString.split(",");
         for (String timeString: timeStrings) {
-            openingTimes.add(new LocalTime[]{getOpeningTime(timeString), getClosingTime(allTimeString)});
+            openingTimes.add(new LocalTime[]{getOpeningTime(timeString), getClosingTime(timeString)});
         }
         return openingTimes.toArray(new LocalTime[0][0]);
-    }
-
-    private static LocalTime[] getClosingTimes(String allTimeString){
-        ArrayList<LocalTime> closingTimes = new ArrayList<>();
-        String[] timeStrings = allTimeString.split(",");
-        for (String timeString: timeStrings) {
-            closingTimes.add(getClosingTime(timeString));
-        }
-        return closingTimes.toArray(new LocalTime[0]);
     }
 
     private static LocalTime getOpeningTime(String timeString){
