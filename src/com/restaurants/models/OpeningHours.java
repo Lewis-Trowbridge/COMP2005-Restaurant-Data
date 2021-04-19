@@ -9,165 +9,116 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class OpeningHours {
-    private LocalTime[] mondayOpen;
-    private LocalTime[] mondayClose;
-    private LocalTime[] tuesdayOpen;
-    private LocalTime[] tuesdayClose;
-    private LocalTime[] wednesdayOpen;
-    private LocalTime[] wednesdayClose;
-    private LocalTime[] thursdayOpen;
-    private LocalTime[] thursdayClose;
-    private LocalTime[] fridayOpen;
-    private LocalTime[] fridayClose;
-    private LocalTime[] saturdayOpen;
-    private LocalTime[] saturdayClose;
-    private LocalTime[] sundayOpen;
-    private LocalTime[] sundayClose;
+    private LocalTime[][] monday;
+    private LocalTime[][] tuesday;
+    private LocalTime[][] wednesday;
+    private LocalTime[][] thursday;
+    private LocalTime[][] friday;
+    private LocalTime[][] saturday;
+    private LocalTime[][] sunday;
 
-    public LocalTime[] getMondayOpen() {
-        return mondayOpen;
-    }
-
-    public LocalTime[] getMondayClose() {
-        return mondayClose;
+    public LocalTime[][] getMonday() {
+        return monday;
     }
 
     @JsonSetter("Monday")
     public void setMonday(String mondayString) {
         LocalTime[] fullDay = checkFullDay(mondayString);
         if (!(fullDay == null)){
-            this.mondayOpen = new LocalTime[]{fullDay[0]};
-            this.mondayClose = new LocalTime[]{fullDay[1]};
+            this.monday = new LocalTime[][]{new LocalTime[]{fullDay[0], fullDay[1]}};
         }
         else {
-            this.mondayOpen = getOpeningTimes(mondayString);
-            this.mondayClose = getClosingTimes(mondayString);
+            this.monday = getOpeningTimes(mondayString);
         }
     }
 
-    public LocalTime[] getTuesdayOpen() {
-        return tuesdayOpen;
-    }
-
-    public LocalTime[] getTuesdayClose() {
-        return tuesdayClose;
+    public LocalTime[][] getTuesday() {
+        return tuesday;
     }
 
     @JsonSetter("Tuesday")
     public void setTuesday(String tuesdayString) {
         LocalTime[] fullDay = checkFullDay(tuesdayString);
         if (!(fullDay == null)){
-            this.tuesdayOpen = new LocalTime[]{fullDay[0]};
-            this.tuesdayClose = new LocalTime[]{fullDay[1]};
+            this.tuesday = new LocalTime[][]{new LocalTime[]{fullDay[0], fullDay[1]}};
         }
         else {
-            this.tuesdayOpen = getOpeningTimes(tuesdayString);
-            this.tuesdayClose = getClosingTimes(tuesdayString);
+            this.tuesday = getOpeningTimes(tuesdayString);
         }
     }
 
-    public LocalTime[] getWednesdayOpen() {
-        return wednesdayOpen;
-    }
-
-    public LocalTime[] getWednesdayClose() {
-        return wednesdayClose;
+    public LocalTime[][] getWednesday() {
+        return wednesday;
     }
 
     @JsonSetter("Wednesday")
     public void setWednesday(String wednesdayString) {
         LocalTime[] fullDay = checkFullDay(wednesdayString);
         if (!(fullDay == null)){
-            this.wednesdayOpen = new LocalTime[]{fullDay[0]};
-            this.wednesdayClose = new LocalTime[]{fullDay[1]};
+            this.wednesday = new LocalTime[][]{new LocalTime[]{fullDay[0], fullDay[1]}};
         }
         else {
-            this.wednesdayOpen = getOpeningTimes(wednesdayString);
-            this.wednesdayClose = getClosingTimes(wednesdayString);
+            this.wednesday = getOpeningTimes(wednesdayString);
         }
     }
 
-    public LocalTime[] getThursdayOpen() {
-        return thursdayOpen;
-    }
-
-    public LocalTime[] getThursdayClose() {
-        return thursdayClose;
+    public LocalTime[][] getThursday() {
+        return thursday;
     }
 
     @JsonSetter("Thursday")
     public void setThursday(String thursdayString) {
         LocalTime[] fullDay = checkFullDay(thursdayString);
         if (!(fullDay == null)){
-            this.thursdayOpen = new LocalTime[]{fullDay[0]};
-            this.thursdayClose = new LocalTime[]{fullDay[1]};
+            this.thursday = new LocalTime[][]{new LocalTime[]{fullDay[0], fullDay[1]}};
         }
         else {
-            this.thursdayOpen = getOpeningTimes(thursdayString);
-            this.thursdayClose = getClosingTimes(thursdayString);
+            this.thursday = getOpeningTimes(thursdayString);
         }
     }
 
-    public LocalTime[] getFridayOpen() {
-        return fridayOpen;
-    }
-
-    public LocalTime[] getFridayClose() {
-        return fridayClose;
+    public LocalTime[][] getFriday() {
+        return friday;
     }
 
     @JsonSetter("Friday")
     public void setFriday(String fridayString) {
         LocalTime[] fullDay = checkFullDay(fridayString);
         if (!(fullDay == null)){
-            this.fridayOpen = new LocalTime[]{fullDay[0]};
-            this.fridayClose = new LocalTime[]{fullDay[1]};
+            this.friday = new LocalTime[][]{new LocalTime[]{fullDay[0], fullDay[1]}};
         }
         else {
-            this.fridayOpen = getOpeningTimes(fridayString);
-            this.fridayClose = getClosingTimes(fridayString);
+            this.friday = getOpeningTimes(fridayString);
         }
     }
 
-    public LocalTime[] getSaturdayOpen() {
-        return saturdayOpen;
-    }
-
-    public LocalTime[] getSaturdayClose() {
-        return saturdayClose;
+    public LocalTime[][] getSaturday() {
+        return saturday;
     }
 
     @JsonSetter("Saturday")
     public void setSaturday(String saturdayString) {
         LocalTime[] fullDay = checkFullDay(saturdayString);
         if (!(fullDay == null)){
-            this.saturdayOpen = new LocalTime[]{fullDay[0]};
-            this.saturdayClose = new LocalTime[]{fullDay[1]};
+            this.saturday = new LocalTime[][]{new LocalTime[]{fullDay[0], fullDay[1]}};
         }
         else {
-            this.saturdayOpen = getOpeningTimes(saturdayString);
-            this.saturdayClose = getClosingTimes(saturdayString);
+            this.saturday = getOpeningTimes(saturdayString);
         }
     }
 
-    public LocalTime[] getSundayOpen() {
-        return sundayOpen;
-    }
-
-    public LocalTime[] getSundayClose() {
-        return sundayClose;
+    public LocalTime[][] getSunday() {
+        return sunday;
     }
 
     @JsonSetter("Sunday")
     public void setSunday(String sundayString) {
         LocalTime[] fullDay = checkFullDay(sundayString);
         if (!(fullDay == null)){
-            this.sundayOpen = new LocalTime[]{fullDay[0]};
-            this.sundayClose = new LocalTime[]{fullDay[1]};
+            this.sunday = new LocalTime[][]{new LocalTime[]{fullDay[0], fullDay[1]}};
         }
         else {
-            this.sundayOpen = getOpeningTimes(sundayString);
-            this.sundayClose = getClosingTimes(sundayString);
+            this.sunday = getOpeningTimes(sundayString);
         }
     }
 
@@ -183,20 +134,13 @@ public class OpeningHours {
 
         OpeningHours newHours = (OpeningHours)obj;
 
-        return Arrays.equals(this.mondayOpen, newHours.mondayOpen)
-                && Arrays.equals(this.mondayClose, newHours.mondayClose)
-                && Arrays.equals(this.tuesdayOpen, newHours.tuesdayOpen)
-                && Arrays.equals(this.tuesdayClose, newHours.tuesdayClose)
-                && Arrays.equals(this.wednesdayOpen, newHours.wednesdayOpen)
-                && Arrays.equals(this.wednesdayClose, newHours.wednesdayClose)
-                && Arrays.equals(this.thursdayOpen, newHours.thursdayOpen)
-                && Arrays.equals(this.thursdayClose, newHours.thursdayClose)
-                && Arrays.equals(this.fridayOpen, newHours.fridayOpen)
-                && Arrays.equals(this.fridayClose, newHours.fridayClose)
-                && Arrays.equals(this.saturdayOpen, newHours.saturdayOpen)
-                && Arrays.equals(this.saturdayClose, newHours.saturdayClose)
-                && Arrays.equals(this.sundayOpen, newHours.sundayOpen)
-                && Arrays.equals(this.sundayClose, newHours.sundayClose);
+        return Arrays.deepEquals(this.monday, newHours.monday)
+                && Arrays.deepEquals(this.tuesday, newHours.tuesday)
+                && Arrays.deepEquals(this.wednesday, newHours.wednesday)
+                && Arrays.deepEquals(this.thursday, newHours.thursday)
+                && Arrays.deepEquals(this.friday, newHours.friday)
+                && Arrays.deepEquals(this.saturday, newHours.saturday)
+                && Arrays.deepEquals(this.sunday, newHours.sunday);
     }
 
     private static LocalTime[] checkFullDay(String timeString){
@@ -213,13 +157,13 @@ public class OpeningHours {
         }
     }
 
-    private static LocalTime[] getOpeningTimes(String allTimeString){
-        ArrayList<LocalTime> openingTimes = new ArrayList<>();
+    private static LocalTime[][] getOpeningTimes(String allTimeString){
+        ArrayList<LocalTime[]> openingTimes = new ArrayList<>();
         String[] timeStrings = allTimeString.split(",");
         for (String timeString: timeStrings) {
-            openingTimes.add(getOpeningTime(timeString));
+            openingTimes.add(new LocalTime[]{getOpeningTime(timeString), getClosingTime(allTimeString)});
         }
-        return openingTimes.toArray(new LocalTime[0]);
+        return openingTimes.toArray(new LocalTime[0][0]);
     }
 
     private static LocalTime[] getClosingTimes(String allTimeString){

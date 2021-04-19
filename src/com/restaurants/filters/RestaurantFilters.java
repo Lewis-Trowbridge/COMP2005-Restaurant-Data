@@ -54,38 +54,38 @@ public class RestaurantFilters {
             switch (dayOfWeek){
                 case "Monday":
                 case "Mon":
-                    if (hours.getMondayOpen()[0] != null && hours.getMondayClose()[0] != null){
+                    if (hours.getMonday()[0] != null && hours.getMonday()[1] != null){
                         restaurantsCopy.add(currentRestaurant);
                     }
                     break;
                 case "Tuesday":
                 case "Tue":
-                    if (hours.getTuesdayOpen()[0] != null && hours.getTuesdayClose()[0] != null){
+                    if (hours.getTuesday()[0] != null && hours.getTuesday()[1] != null){
                         restaurantsCopy.add(currentRestaurant);
                     }
                 case "Wednesday":
                 case "Wed":
-                    if (hours.getWednesdayOpen()[0] != null && hours.getWednesdayClose()[0] != null){
+                    if (hours.getWednesday()[0] != null && hours.getWednesday()[1] != null){
                         restaurantsCopy.add(currentRestaurant);
                     }
                 case "Thursday":
                 case "Thurs":
-                    if (hours.getThursdayOpen()[0] != null && hours.getThursdayClose()[0] != null){
+                    if (hours.getThursday()[0] != null && hours.getThursday()[1] != null){
                         restaurantsCopy.add(currentRestaurant);
                     }
                 case "Friday":
                 case "Fri":
-                    if (hours.getFridayOpen()[0] != null && hours.getFridayClose()[0] != null){
+                    if (hours.getFriday()[0] != null && hours.getFriday()[1] != null){
                         restaurantsCopy.add(currentRestaurant);
                     }
                 case "Saturday":
                 case "Sat":
-                    if (hours.getSaturdayOpen()[0] != null && hours.getSaturdayClose()[0] != null){
+                    if (hours.getSaturday()[0] != null && hours.getSaturday()[1] != null){
                         restaurantsCopy.add(currentRestaurant);
                     }
                 case "Sunday":
                 case "Sun":
-                    if (hours.getSundayOpen()[0] != null && hours.getSundayClose()[0] != null){
+                    if (hours.getSunday()[0] != null && hours.getSunday()[1] != null){
                         restaurantsCopy.add(currentRestaurant);
                     }
                 default:
