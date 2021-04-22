@@ -5,6 +5,7 @@ import com.restaurants.models.OpeningHours;
 import com.restaurants.models.Restaurant;
 import com.restaurants.models.Review;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.lang.Math;
@@ -43,7 +44,53 @@ public class RestaurantFilters {
     }
 
     public ArrayList<Restaurant> filterRestaurantsByHour(ArrayList<Restaurant> restaurants, int hour) throws IllegalArgumentException {
-        return null;
+        ArrayList<Restaurant> restaurantsCopy = new ArrayList<>();
+
+        // Correct 24 to 0
+        if (hour == 24){
+            hour = 0;
+        }
+
+        if (hour >= 0 && hour <= 23){
+            for (Restaurant currentRestaurant: restaurants) {
+                boolean searched = false;
+                while (!searched){
+                    OpeningHours openingHours = currentRestaurant.getOpeningHours();
+                    LocalTime[][][] allOpeningTimes = {openingHours.getMonday(), openingHours.getTuesday(),
+                            openingHours.getWednesday(), openingHours.getThursday(), openingHours.getFriday(),
+                            openingHours.getSaturday(), openingHours.getSunday()};
+
+                    for (LocalTime[][] dayOpeningTimes: allOpeningTimes) {
+
+                        if (searched){
+                            break;
+                        }
+
+                        for (LocalTime[] currentOpeningTime : dayOpeningTimes) {
+
+                            if (searched){
+                                break;
+                            }
+
+                            if ((currentOpeningTime[0] != null || currentOpeningTime[1] != null) &&
+                                    (hour >= currentOpeningTime[0].getHour() && hour <= currentOpeningTime[1].getHour())){
+
+                                restaurantsCopy.add(currentRestaurant);
+                                // If a match was found, set searched to true and stop early
+                                searched = true;
+                            }
+                        }
+                    }
+                    // Set searched to true to avoid endless loop in the event a match was not found
+                    searched = true;
+                }
+            }
+        }
+        else {
+            throw new IllegalArgumentException();
+        }
+
+        return restaurantsCopy;
     }
 
     public ArrayList<Restaurant> filterRestaurantsByDayOfWeek(ArrayList<Restaurant> restaurants, String dayOfWeek) throws IllegalArgumentException {

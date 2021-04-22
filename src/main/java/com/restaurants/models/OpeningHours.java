@@ -183,6 +183,9 @@ public class OpeningHours {
 
     private static LocalTime getClosingTime(String timeString){
         String timeSubstring = timeString.split("-")[1].trim();
+        if (timeSubstring.equals("12:00 am")){
+            return LocalTime.MAX;
+        }
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E");
             // Check if the string is a day of the week
