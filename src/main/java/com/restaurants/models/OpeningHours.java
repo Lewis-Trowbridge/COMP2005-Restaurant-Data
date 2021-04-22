@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -161,7 +162,18 @@ public class OpeningHours {
         ArrayList<LocalTime[]> openingTimes = new ArrayList<>();
         String[] timeStrings = allTimeString.split(",");
         for (String timeString: timeStrings) {
-            openingTimes.add(new LocalTime[]{getOpeningTime(timeString), getClosingTime(timeString)});
+            LocalTime opening = getOpeningTime(timeString);
+            LocalTime closing = getClosingTime(timeString);
+            // If the number of seconds between opening and closing is positive, these go in chronological order
+            // and we can use them as they are
+            if (opening.until(closing, ChronoUnit.SECONDS) > 0){
+                openingTimes.add(new LocalTime[]{opening, closing});
+            }
+            // If it is negative, this likely extends over midnight and should be broken up for the sake of comparisons
+            else {
+                openingTimes.add(new LocalTime[]{opening, LocalTime.MAX});
+                openingTimes.add(new LocalTime[]{LocalTime.MIN, closing});
+            }
         }
         return openingTimes.toArray(new LocalTime[0][0]);
     }
