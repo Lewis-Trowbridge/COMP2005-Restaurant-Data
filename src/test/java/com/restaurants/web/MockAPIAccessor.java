@@ -19,7 +19,7 @@ public class MockAPIAccessor implements IAPIAccessor {
     @Override
     public ArrayList<Restaurant> getAllRestaurants() {
         try {
-            Restaurants restaurants = mapper.readValue(new File("./testresources/restaurant-data.json"), Restaurants.class);
+            Restaurants restaurants = mapper.readValue(new File("./src/test/resources/restaurant-data.json"), Restaurants.class);
             return restaurants.restaurants;
         } catch (IOException e) {
             e.printStackTrace();
