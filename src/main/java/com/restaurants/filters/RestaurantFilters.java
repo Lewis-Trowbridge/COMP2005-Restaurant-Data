@@ -73,7 +73,8 @@ public class RestaurantFilters {
                             }
 
                             try {
-                                if ((hour >= currentOpeningTime[0].getHour() && hour <= currentOpeningTime[1].getHour())){
+                                if ((hour >= currentOpeningTime[0].getHour() && hour <= currentOpeningTime[1].getHour())
+                                || (hour == 0 && (currentOpeningTime[0] == LocalTime.MIN || currentOpeningTime[1] == LocalTime.MAX))){
 
                                     restaurantsCopy.add(currentRestaurant);
                                     // If a match was found, set searched to true and stop early
