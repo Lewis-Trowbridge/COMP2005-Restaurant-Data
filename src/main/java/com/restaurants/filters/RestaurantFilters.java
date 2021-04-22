@@ -72,12 +72,15 @@ public class RestaurantFilters {
                                 break;
                             }
 
-                            if ((currentOpeningTime[0] != null || currentOpeningTime[1] != null) &&
-                                    (hour >= currentOpeningTime[0].getHour() && hour <= currentOpeningTime[1].getHour())){
+                            try {
+                                if ((hour >= currentOpeningTime[0].getHour() && hour <= currentOpeningTime[1].getHour())){
 
-                                restaurantsCopy.add(currentRestaurant);
-                                // If a match was found, set searched to true and stop early
-                                searched = true;
+                                    restaurantsCopy.add(currentRestaurant);
+                                    // If a match was found, set searched to true and stop early
+                                    searched = true;
+                                }
+                            } catch (NullPointerException ignored){
+
                             }
                         }
                     }
