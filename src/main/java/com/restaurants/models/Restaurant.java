@@ -133,4 +133,9 @@ public class Restaurant {
                 && this.openingHours.equals(newRestaurant.openingHours)
                 && Arrays.equals(this.reviews, newRestaurant.reviews);
     }
+
+    @Override
+    public String toString() {
+        return String.format("ID: %d, name: %s", this.id, this.name);
+    }
 }
