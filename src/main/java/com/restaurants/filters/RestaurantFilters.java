@@ -113,21 +113,25 @@ public class RestaurantFilters {
                     if (hours.getTuesday()[0][0] != null && hours.getTuesday()[0][1] != null){
                         restaurantsCopy.add(currentRestaurant);
                     }
+                    break;
                 case "Wednesday":
                 case "Wed":
                     if (hours.getWednesday()[0][0] != null && hours.getWednesday()[0][1] != null){
                         restaurantsCopy.add(currentRestaurant);
                     }
+                    break;
                 case "Thursday":
                 case "Thurs":
                     if (hours.getThursday()[0][0] != null && hours.getThursday()[0][1] != null){
                         restaurantsCopy.add(currentRestaurant);
                     }
+                    break;
                 case "Friday":
                 case "Fri":
                     if (hours.getFriday()[0][0] != null && hours.getFriday()[0][1] != null){
                         restaurantsCopy.add(currentRestaurant);
                     }
+                    break;
                 case "Saturday":
                 case "Sat":
                     if (hours.getSaturday()[0][0] != null && hours.getSaturday()[0][1] != null){
@@ -138,6 +142,7 @@ public class RestaurantFilters {
                     if (hours.getSunday()[0][0] != null && hours.getSunday()[0][1] != null){
                         restaurantsCopy.add(currentRestaurant);
                     }
+                    break;
                 default:
                     throw new IllegalArgumentException();
             }
