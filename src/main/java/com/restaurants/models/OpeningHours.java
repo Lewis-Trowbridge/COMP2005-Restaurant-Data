@@ -164,16 +164,21 @@ public class OpeningHours {
         for (String timeString: timeStrings) {
             LocalTime opening = getOpeningTime(timeString);
             LocalTime closing = getClosingTime(timeString);
-            // If the number of seconds between opening and closing is positive, these go in chronological order
-            // and we can use them as they are
-            if (opening.until(closing, ChronoUnit.SECONDS) > 0){
-                openingTimes.add(new LocalTime[]{opening, closing});
+            try {
+                // If the number of seconds between opening and closing is positive, these go in chronological order
+                // and we can use them as they are
+                if (opening.until(closing, ChronoUnit.SECONDS) > 0){
+                    openingTimes.add(new LocalTime[]{opening, closing});
+                }
+                // If it is negative, this likely extends over midnight and should be broken up for the sake of comparisons
+                else {
+                    openingTimes.add(new LocalTime[]{opening, LocalTime.MAX});
+                    openingTimes.add(new LocalTime[]{LocalTime.MIN, closing});
+                }
+            } catch (NullPointerException e){
+                openingTimes.add(new LocalTime[]{null, null});
             }
-            // If it is negative, this likely extends over midnight and should be broken up for the sake of comparisons
-            else {
-                openingTimes.add(new LocalTime[]{opening, LocalTime.MAX});
-                openingTimes.add(new LocalTime[]{LocalTime.MIN, closing});
-            }
+
         }
         return openingTimes.toArray(new LocalTime[0][0]);
     }
