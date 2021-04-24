@@ -125,7 +125,7 @@ public class Restaurant {
         Restaurant newRestaurant = (Restaurant)obj;
 
         return this.id == newRestaurant.id && this.name.equals(newRestaurant.name)
-                && this.DOHMHInspectionScore.equals(newRestaurant.DOHMHInspectionScore)
+                && this.DOHMHInspectionScore == newRestaurant.DOHMHInspectionScore
                 && this.neighbourhood.equals(newRestaurant.neighbourhood)
                 && this.photograph.equals(newRestaurant.photograph) && this.address.equals(newRestaurant.address)
                 && this.latlng.equals(newRestaurant.latlng)
