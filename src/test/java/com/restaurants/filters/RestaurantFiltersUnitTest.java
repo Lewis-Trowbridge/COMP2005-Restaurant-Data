@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-public class RestaurantFiltersUnitTests {
+public class RestaurantFiltersUnitTest {
 
     MockAPIAccessor apiAccessor;
     ArrayList<Restaurant> restaurants;

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-public class RestaurantFiltersIntegrationTests {
+public class RestaurantFiltersIntegrationTest {
 
     APIAccessor apiAccessor;
     ArrayList<Restaurant> restaurants;
