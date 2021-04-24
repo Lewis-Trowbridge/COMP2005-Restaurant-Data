@@ -17,7 +17,7 @@ public class RestaurantFiltersIntegrationTest {
     RestaurantFilters filters;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         apiAccessor = new APIAccessor();
         restaurants = apiAccessor.getAllRestaurants();
         filters = new RestaurantFilters();
@@ -142,7 +142,7 @@ public class RestaurantFiltersIntegrationTest {
 
     @Test
     public void filterRestaurantsByDayOfWeekWithValidInputs() {
-        ArrayList<Restaurant> expectedRestaurants = (ArrayList<Restaurant>) restaurants.clone();
+        ArrayList<Restaurant> expectedRestaurants = new ArrayList<>(restaurants);
         // Restaurant index 5 is the only restaurant not open on Monday, remove this to test filtering
         expectedRestaurants.remove(5);
         String testDay = "Monday";
@@ -154,7 +154,7 @@ public class RestaurantFiltersIntegrationTest {
 
     @Test
     public void filterRestaurantsByDayOfWeekWithShortenedDay() {
-        ArrayList<Restaurant> expectedRestaurants = (ArrayList<Restaurant>) restaurants.clone();
+        ArrayList<Restaurant> expectedRestaurants = new ArrayList<>(restaurants);
         // Restaurant index 5 is the only restaurant not open on Monday, remove this to test filtering
         expectedRestaurants.remove(5);
         String testDay = "Mon";
@@ -201,7 +201,7 @@ public class RestaurantFiltersIntegrationTest {
     @Test
     public void orderRestaurantsByDOHMHInspectionScoreWithValidInputs(){
         // Remove null score
-        ArrayList<Restaurant> testRestaurants = (ArrayList<Restaurant>) restaurants.clone();
+        ArrayList<Restaurant> testRestaurants = new ArrayList<>(restaurants);
         testRestaurants.remove(2);
 
         ArrayList<Restaurant> expectedRestaurants = new ArrayList<>();
@@ -224,7 +224,7 @@ public class RestaurantFiltersIntegrationTest {
 
     @Test(expected = NullPointerException.class)
     public void orderRestaurantsByDOHMHInspectionScoreWithNullScore(){
-        ArrayList<Restaurant> testRestaurants = (ArrayList<Restaurant>) restaurants.clone();
+        ArrayList<Restaurant> testRestaurants = new ArrayList<>(restaurants);
 
         filters.orderRestaurantsByDOHMHInspectionScore(testRestaurants);
     }
@@ -237,6 +237,6 @@ public class RestaurantFiltersIntegrationTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
     }
 }
