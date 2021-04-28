@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 
 public class OpeningHours {
     private LocalTime[][] monday;
@@ -217,7 +218,7 @@ public class OpeningHours {
     }
 
     private static LocalTime getTimeFromString(String timeString){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:m a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:m a", Locale.UK);
         try {
             return LocalTime.parse(timeString, formatter);
         } catch (DateTimeParseException e) {
