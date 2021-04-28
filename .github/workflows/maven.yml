@@ -23,3 +23,9 @@ jobs:
         distribution: 'adopt'
     - name: Run unit/integration tests
       run: mvn -B --update-snapshots verify
+    - name: Upload code coverage artifacts
+      uses: actions/upload-artifact@v2
+      with:
+          name: jacoco-code-coverage
+          path: /target/site/jacoco/*
+
