@@ -179,7 +179,7 @@ public class RestaurantFilters {
     public ArrayList<Restaurant> orderRestaurantsByDOHMHInspectionScore(ArrayList<Restaurant> restaurants) throws IndexOutOfBoundsException {
 
         if (restaurants.size() > 0){
-            ArrayList<Restaurant> restaurantsCopy = (ArrayList<Restaurant>) restaurants.clone();
+            ArrayList<Restaurant> restaurantsCopy = new ArrayList<>(restaurants);
             restaurantsCopy.sort(
                     Comparator.comparing(Restaurant::getDOHMHInspectionScore).reversed()
             );
