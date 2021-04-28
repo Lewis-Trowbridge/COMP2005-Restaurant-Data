@@ -145,8 +145,6 @@ public class OpeningHours {
     }
 
     private static LocalTime[] checkFullDay(String timeString){
-        // Temporary - for debugging purposes
-        System.out.println(timeString);
         LocalTime[] timeArray;
         switch (timeString){
             case "Closed":
