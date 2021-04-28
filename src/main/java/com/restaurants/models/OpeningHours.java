@@ -222,8 +222,6 @@ public class OpeningHours {
         try {
             return LocalTime.parse(timeString, formatter);
         } catch (DateTimeParseException e) {
-            // Temporary - this should output if the error that I'm imagining is happening is happening.
-            System.out.println("Date time formatter is not working");
             return null;
         }
     }
