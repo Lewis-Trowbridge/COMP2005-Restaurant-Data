@@ -7,10 +7,8 @@ import com.restaurants.models.Review;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.lang.Math;
-import java.util.logging.ConsoleHandler;
 
 public class RestaurantFilters {
 
@@ -69,8 +67,7 @@ public class RestaurantFilters {
                         }
 
                         for (LocalTime[] currentOpeningTime : dayOpeningTimes) {
-                            // Temporary - for debugging purposes
-                            System.out.println(Arrays.toString(currentOpeningTime));
+
                             if (searched){
                                 break;
                             }
