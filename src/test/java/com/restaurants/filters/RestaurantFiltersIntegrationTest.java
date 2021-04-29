@@ -271,6 +271,21 @@ public class RestaurantFiltersIntegrationTest {
         filters.orderRestaurantsByDistanceFromHotel(emptyRestaurants);
     }
 
+    @Test
+    public void filterRestaurantsByCuisineAndNeighbourhoodWithValidInputs(){
+        String testCuisine = "Asian";
+        String testNeighbourhood = "Manhattan";
+
+        ArrayList<Restaurant> expectedRestaurants = new ArrayList<>();
+        expectedRestaurants.add(restaurants.get(0));
+        expectedRestaurants.add(restaurants.get(2));
+
+        ArrayList<Restaurant> testRestaurants = filters.filterRestaurantsByCuisine(restaurants, testCuisine);
+        testRestaurants = filters.filterRestaurantsByNeighbourhood(testRestaurants, testNeighbourhood);
+
+        assertEquals(expectedRestaurants, testRestaurants);
+    }
+
     @After
     public void tearDown() {
     }
