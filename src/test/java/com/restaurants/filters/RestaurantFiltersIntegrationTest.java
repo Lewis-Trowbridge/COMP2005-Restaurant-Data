@@ -236,6 +236,41 @@ public class RestaurantFiltersIntegrationTest {
         filters.orderRestaurantsByDOHMHInspectionScore(testRestaurants);
     }
 
+    @Test
+    public void orderRestaurantsByDistanceFromHotelWithValidInputs(){
+        ArrayList<Restaurant> testRestaurants = new ArrayList<>();
+        testRestaurants.add(restaurants.get(2));
+        testRestaurants.add(restaurants.get(8));
+        testRestaurants.add(restaurants.get(9));
+        testRestaurants.add(restaurants.get(1));
+        testRestaurants.add(restaurants.get(6));
+        testRestaurants.add(restaurants.get(3));
+        testRestaurants.add(restaurants.get(7));
+        testRestaurants.add(restaurants.get(5));
+        testRestaurants.add(restaurants.get(0));
+        testRestaurants.add(restaurants.get(4));
+
+
+        ArrayList<Restaurant> orderedRestaurants = filters.orderRestaurantsByDistanceFromHotel(restaurants);
+
+        assertEquals(testRestaurants, orderedRestaurants);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void orderRestaurantsByDistanceFromHotelWithNullNeighbourhood(){
+        // Set restaurant neighbourhood to null
+        restaurants.get(0).setNeighbourhood(null);
+
+        filters.orderRestaurantsByDistanceFromHotel(restaurants);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void orderRestaurantsByDistanceFromHotelWithEmptyList(){
+        ArrayList<Restaurant> emptyRestaurants = new ArrayList<>();
+
+        filters.orderRestaurantsByDistanceFromHotel(emptyRestaurants);
+    }
+
     @After
     public void tearDown() {
     }
