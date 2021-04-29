@@ -195,16 +195,10 @@ public class RestaurantFilters {
         if (restaurants.size() > 0){
             ArrayList<RestaurantDistance> distances = new ArrayList<>();
             for (Restaurant currentRestaurant: restaurants) {
-                switch (currentRestaurant.getNeighbourhood()){
-                    case manhattanName:
-                        distances.add(new RestaurantDistance(currentRestaurant, GetDistanceBetweenTwoCoords(currentRestaurant.getLatlng(), manhattanHotel)));
-                        break;
-                    case queensName:
-                        distances.add(new RestaurantDistance(currentRestaurant, GetDistanceBetweenTwoCoords(currentRestaurant.getLatlng(), queensHotel)));
-                        break;
-                    case brooklynName:
-                        distances.add(new RestaurantDistance(currentRestaurant, GetDistanceBetweenTwoCoords(currentRestaurant.getLatlng(), brooklynHotel)));
-                        break;
+                switch (currentRestaurant.getNeighbourhood()) {
+                    case manhattanName -> distances.add(new RestaurantDistance(currentRestaurant, GetDistanceBetweenTwoCoords(currentRestaurant.getLatlng(), manhattanHotel)));
+                    case queensName -> distances.add(new RestaurantDistance(currentRestaurant, GetDistanceBetweenTwoCoords(currentRestaurant.getLatlng(), queensHotel)));
+                    case brooklynName -> distances.add(new RestaurantDistance(currentRestaurant, GetDistanceBetweenTwoCoords(currentRestaurant.getLatlng(), brooklynHotel)));
                 }
             }
 
