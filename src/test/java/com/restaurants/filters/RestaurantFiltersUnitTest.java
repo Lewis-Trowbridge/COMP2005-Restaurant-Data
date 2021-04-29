@@ -256,6 +256,21 @@ public class RestaurantFiltersUnitTest {
         assertEquals(testRestaurants, orderedRestaurants);
     }
 
+    @Test(expected = NullPointerException.class)
+    public void orderRestaurantsByDistanceFromHotelWithNullNeighbourhood(){
+        // Set restaurant neighbourhood to null
+        restaurants.get(0).setNeighbourhood(null);
+
+        filters.orderRestaurantsByDistanceFromHotel(restaurants);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void orderRestaurantsByDistanceFromHotelWithEmptyList(){
+        ArrayList<Restaurant> emptyRestaurants = new ArrayList<>();
+
+        filters.orderRestaurantsByDistanceFromHotel(emptyRestaurants);
+    }
+
     @After
     public void tearDown() {
     }
