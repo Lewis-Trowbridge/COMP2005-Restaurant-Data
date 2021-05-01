@@ -353,6 +353,50 @@ public class RestaurantFiltersIntegrationTest {
         filteredRestaurants = filters.filterRestaurantsByHour(filteredRestaurants, testHour);
     }
 
+    @Test
+    public void filterRestaurantsByNeighbourhoodAndReviewScoresWithValidInputs(){
+        String testNeighbourhood = "Manhattan";
+        float testScore = 4.0f;
+        ArrayList<Restaurant> expectedRestaurants = new ArrayList<>();
+        expectedRestaurants.add(restaurants.get(3));
+        expectedRestaurants.add(restaurants.get(6));
+        expectedRestaurants.add(restaurants.get(7));
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByNeighbourhood(restaurants, testNeighbourhood);
+        filteredRestaurants = filters.filterRestaurantsByAverageReviews(filteredRestaurants, testScore);
+
+        assertEquals(expectedRestaurants, filteredRestaurants);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void filterRestaurantsNeighbourhoodAndReviewScoresWithNullNeighbourhood(){
+        String testNeighbourhood = "Queens";
+        float testScore = 3.0f;
+
+        restaurants.get(0).setNeighbourhood(null);
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByNeighbourhood(restaurants, testNeighbourhood);
+        filteredRestaurants = filters.filterRestaurantsByAverageReviews(filteredRestaurants, testScore);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void filterRestaurantsByNeighbourhoodAndReviewsScoresWithNegativeScore(){
+        String testNeighbourhood = "Manhattan";
+        float testScore = -5.0f;
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByNeighbourhood(restaurants, testNeighbourhood);
+        filteredRestaurants = filters.filterRestaurantsByAverageReviews(filteredRestaurants, testScore);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void filterRestaurantsByNeighbourhoodAndReviewsScoresWithTooHighScore(){
+        String testNeighbourhood = "Manhattan";
+        float testScore = 1000.0f;
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByNeighbourhood(restaurants, testNeighbourhood);
+        filteredRestaurants = filters.filterRestaurantsByAverageReviews(filteredRestaurants, testScore);
+    }
+
     @After
     public void tearDown() {
     }
