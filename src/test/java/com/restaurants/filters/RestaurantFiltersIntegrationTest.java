@@ -397,6 +397,28 @@ public class RestaurantFiltersIntegrationTest {
         filteredRestaurants = filters.filterRestaurantsByAverageReviews(filteredRestaurants, testScore);
     }
 
+    @Test
+    public void filterRestaurantsByNeighbourhoodAndOrderedByInspectionScoreWithValidInputs(){
+        String testNeighbourhood = "Brooklyn";
+        ArrayList<Restaurant> expectedRestaurants = new ArrayList<>();
+        expectedRestaurants.add(restaurants.get(1));
+        expectedRestaurants.add(restaurants.get(4));
+        expectedRestaurants.add(restaurants.get(5));
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByNeighbourhood(restaurants, testNeighbourhood);
+        filteredRestaurants = filters.orderRestaurantsByDOHMHInspectionScore(filteredRestaurants);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void filterRestaurantsByNeighbourhoodAndOrderedByInspectionScoreWithNullNeighbourhood(){
+        String testNeighbourhood = "Brooklyn";
+
+        restaurants.get(0).setNeighbourhood(null);
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByNeighbourhood(restaurants, testNeighbourhood);
+        filteredRestaurants = filters.orderRestaurantsByDOHMHInspectionScore(filteredRestaurants);
+    }
+
     @After
     public void tearDown() {
     }
