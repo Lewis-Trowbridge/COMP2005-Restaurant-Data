@@ -58,6 +58,14 @@ public class RestaurantFiltersUnitTest {
         assertEquals(emptyRestaurants, filteredRestaurants);
     }
 
+    @Test(expected = NullPointerException.class)
+    public void filterRestaurantsByCuisineWithNullCuisine() {
+        String testCuisine = "Mexican";
+        restaurants.get(0).setCuisineType(null);
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByCuisine(restaurants, testCuisine);
+    }
+
     @Test
     public void filterRestaurantsByNeighbourhoodWithValidInputs() {
         String testNeighbourhood = "Queens";
@@ -88,6 +96,14 @@ public class RestaurantFiltersUnitTest {
         ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByNeighbourhood(restaurants, testNeighbourhood);
 
         assertEquals(emptyRestaurants, filteredRestaurants);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void filterRestaurantsByNeighbourhoodWithNullNeighbourhood() {
+        String testNeighbourhood = "Queens";
+        restaurants.get(0).setNeighbourhood(null);
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByNeighbourhood(restaurants, testNeighbourhood);
     }
 
     @Test
