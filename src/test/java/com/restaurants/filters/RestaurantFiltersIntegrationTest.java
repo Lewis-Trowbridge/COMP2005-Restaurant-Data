@@ -286,6 +286,26 @@ public class RestaurantFiltersIntegrationTest {
         assertEquals(expectedRestaurants, testRestaurants);
     }
 
+    @Test(expected = NullPointerException.class)
+    public void filterRestaurantsByCuisineAndNeighbourhoodWithNullCuisine(){
+        String testCuisine = "Asian";
+        String testNeighbourhood = "Manhattan";
+        restaurants.get(0).setCuisineType(null);
+
+        ArrayList<Restaurant> testRestaurants =  filters.filterRestaurantsByCuisine(restaurants, testCuisine);
+        testRestaurants = filters.filterRestaurantsByNeighbourhood(testRestaurants, testNeighbourhood);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void filterRestaurantsByCuisineAndNeighbourhoodWithNullNeighbourhood(){
+        String testCuisine = "Asian";
+        String testNeighbourhood = "Manhattan";
+        restaurants.get(0).setNeighbourhood(null);
+
+        ArrayList<Restaurant> testRestaurants =  filters.filterRestaurantsByCuisine(restaurants, testCuisine);
+        testRestaurants = filters.filterRestaurantsByNeighbourhood(testRestaurants, testNeighbourhood);
+    }
+
     @After
     public void tearDown() {
     }
