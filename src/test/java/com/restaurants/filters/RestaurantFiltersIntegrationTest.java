@@ -321,6 +321,37 @@ public class RestaurantFiltersIntegrationTest {
         ArrayList<Restaurant> testRestaurants =  filters.filterRestaurantsByCuisine(restaurants, testCuisine);
         testRestaurants = filters.filterRestaurantsByNeighbourhood(testRestaurants, testNeighbourhood);
     }
+    
+    @Test
+    public void filterRestaurantsByDayOfWeekAndHourWithValidInputs(){
+        String testDayOfWeek = "Sun";
+        int testHour = 12;
+        ArrayList<Restaurant> expectedRestaurants = new ArrayList<>(restaurants);
+        expectedRestaurants.remove(8);
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByDayOfWeek(restaurants, testDayOfWeek);
+        filteredRestaurants = filters.filterRestaurantsByHour(filteredRestaurants, testHour);
+
+        assertEquals(expectedRestaurants, filteredRestaurants);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void filterRestaurantsByDayOfWeekAndHourWithInvalidDayOfWeek(){
+        String testDayOfWeek = "u09uewhdhiofhsiodhfj";
+        int testHour = 12;
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByDayOfWeek(restaurants, testDayOfWeek);
+        filteredRestaurants = filters.filterRestaurantsByHour(filteredRestaurants, testHour);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void filterRestaurantsByDayOfWeekAndHourWithInvalidHour(){
+        String testDayOfWeek = "Wed";
+        int testHour = 50;
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByDayOfWeek(restaurants, testDayOfWeek);
+        filteredRestaurants = filters.filterRestaurantsByHour(filteredRestaurants, testHour);
+    }
 
     @After
     public void tearDown() {
