@@ -8,3 +8,4 @@ This is an application designed to parse and manipulate restaurant data from [th
 
 - [Jackson Databind](https://github.com/FasterXML/jackson-databind)
 - [JUnit 4](https://github.com/junit-team/junit4)
+- [JaCoCo](https://github.com/jacoco/jacoco)
