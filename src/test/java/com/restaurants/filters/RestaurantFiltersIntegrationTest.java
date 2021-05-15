@@ -302,6 +302,32 @@ public class RestaurantFiltersIntegrationTest {
         assertEquals(expectedRestaurants, testRestaurants);
     }
 
+    @Test
+    public void filterRestaurantsByCuisineAndNeighbourhoodWithFakeNeighbourhood(){
+        String testCuisine = "Asian";
+        String testNeighbourhood = "Chelsea";
+
+        ArrayList<Restaurant> expectedRestaurants = new ArrayList<>();
+
+        ArrayList<Restaurant> testRestaurants = filters.filterRestaurantsByCuisine(restaurants, testCuisine);
+        testRestaurants = filters.filterRestaurantsByNeighbourhood(testRestaurants, testNeighbourhood);
+
+        assertEquals(expectedRestaurants, testRestaurants);
+    }
+
+    @Test
+    public void filterRestaurantsByCuisineAndNeighbourhoodWithFakeCuisine(){
+        String testCuisine = "Thai";
+        String testNeighbourhood = "Queens";
+
+        ArrayList<Restaurant> expectedRestaurants = new ArrayList<>();
+
+        ArrayList<Restaurant> testRestaurants = filters.filterRestaurantsByCuisine(restaurants, testCuisine);
+        testRestaurants = filters.filterRestaurantsByNeighbourhood(testRestaurants, testNeighbourhood);
+
+        assertEquals(expectedRestaurants, testRestaurants);
+    }
+
     @Test(expected = NullPointerException.class)
     public void filterRestaurantsByCuisineAndNeighbourhoodWithNullCuisine(){
         String testCuisine = "Asian";
@@ -368,6 +394,18 @@ public class RestaurantFiltersIntegrationTest {
         assertEquals(expectedRestaurants, filteredRestaurants);
     }
 
+    @Test
+    public void filterRestaurantsByNeighbourhoodAndReviewScoresWithFakeNeighbourhood(){
+        String testNeighbourhood = "Chelsea";
+        float testScore = 4.0f;
+        ArrayList<Restaurant> expectedRestaurants = new ArrayList<>();
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByNeighbourhood(restaurants, testNeighbourhood);
+        filteredRestaurants = filters.filterRestaurantsByAverageReviews(filteredRestaurants, testScore);
+
+        assertEquals(expectedRestaurants, filteredRestaurants);
+    }
+
     @Test(expected = NullPointerException.class)
     public void filterRestaurantsNeighbourhoodAndReviewScoresWithNullNeighbourhood(){
         String testNeighbourhood = "Queens";
@@ -380,7 +418,7 @@ public class RestaurantFiltersIntegrationTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void filterRestaurantsByNeighbourhoodAndReviewsScoresWithNegativeScore(){
+    public void filterRestaurantsByNeighbourhoodAndReviewScoresWithNegativeScore(){
         String testNeighbourhood = "Manhattan";
         float testScore = -5.0f;
 
@@ -389,7 +427,7 @@ public class RestaurantFiltersIntegrationTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void filterRestaurantsByNeighbourhoodAndReviewsScoresWithTooHighScore(){
+    public void filterRestaurantsByNeighbourhoodAndReviewScoresWithTooHighScore(){
         String testNeighbourhood = "Manhattan";
         float testScore = 1000.0f;
 
@@ -398,19 +436,30 @@ public class RestaurantFiltersIntegrationTest {
     }
 
     @Test
-    public void filterRestaurantsByNeighbourhoodAndOrderedByInspectionScoreWithValidInputs(){
+    public void filterRestaurantsByNeighbourhoodAndOrderByInspectionScoreWithValidInputs(){
         String testNeighbourhood = "Brooklyn";
         ArrayList<Restaurant> expectedRestaurants = new ArrayList<>();
-        expectedRestaurants.add(restaurants.get(1));
-        expectedRestaurants.add(restaurants.get(4));
         expectedRestaurants.add(restaurants.get(5));
+        expectedRestaurants.add(restaurants.get(4));
+        expectedRestaurants.add(restaurants.get(1));
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByNeighbourhood(restaurants, testNeighbourhood);
+        filteredRestaurants = filters.orderRestaurantsByDOHMHInspectionScore(filteredRestaurants);
+
+        assertEquals(expectedRestaurants, filteredRestaurants);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void filterRestaurantsByNeighbourhoodAndOrderByInspectionScoreWithFakeNeighbourhood(){
+        String testNeighbourhood = "Chelsea";
+        ArrayList<Restaurant> expectedRestaurants = new ArrayList<>();
 
         ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByNeighbourhood(restaurants, testNeighbourhood);
         filteredRestaurants = filters.orderRestaurantsByDOHMHInspectionScore(filteredRestaurants);
     }
 
     @Test(expected = NullPointerException.class)
-    public void filterRestaurantsByNeighbourhoodAndOrderedByInspectionScoreWithNullNeighbourhood(){
+    public void filterRestaurantsByNeighbourhoodAndOrderByInspectionScoreWithNullNeighbourhood(){
         String testNeighbourhood = "Brooklyn";
 
         restaurants.get(0).setNeighbourhood(null);
@@ -435,8 +484,18 @@ public class RestaurantFiltersIntegrationTest {
         assertEquals(expectedRestaurants, filteredRestaurants);
     }
 
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void filterRestaurantsByNeighbourhoodAndOrderByDistanceFromHotelWithFakeNeighbourhood(){
+        String testNeighbourhood = "Chelsea";
+
+        ArrayList<Restaurant> expectedRestaurants = new ArrayList<>();
+
+        ArrayList<Restaurant> filteredRestaurants = filters.filterRestaurantsByNeighbourhood(restaurants, testNeighbourhood);
+        filteredRestaurants = filters.orderRestaurantsByDistanceFromHotel(filteredRestaurants);
+    }
+
     @Test(expected = NullPointerException.class)
-    public void filterRestaurantsByNeighbourhoodAndOrderedByDistanceFromHotelWithNullNeighbourhood(){
+    public void filterRestaurantsByNeighbourhoodAndOrderByDistanceFromHotelWithNullNeighbourhood(){
         String testNeighbourhood = "Brooklyn";
 
         restaurants.get(0).setNeighbourhood(null);
