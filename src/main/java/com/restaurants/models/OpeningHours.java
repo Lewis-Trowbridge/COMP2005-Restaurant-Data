@@ -163,8 +163,9 @@ public class OpeningHours {
         ArrayList<LocalTime[]> openingTimes = new ArrayList<>();
         String[] timeStrings = allTimeString.split(",");
         for (String timeString: timeStrings) {
-            LocalTime opening = getOpeningTime(timeString);
-            LocalTime closing = getClosingTime(timeString);
+            String[] timeSubstrings = timeString.split("-");
+            LocalTime opening = getOpeningTime(timeSubstrings[0].trim());
+            LocalTime closing = getClosingTime(timeSubstrings[1].trim());
             try {
                 // If the number of seconds between opening and closing is positive, these go in chronological order
                 // and we can use them as they are
@@ -185,35 +186,33 @@ public class OpeningHours {
     }
 
     private static LocalTime getOpeningTime(String timeString){
-        String timeSubstring = timeString.split("-")[0].trim();
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E");
             // Check if the string is a day of the week
-            formatter.parse(timeSubstring.substring(0, 3));
+            formatter.parse(timeString.substring(0, 3));
             // If that didn't throw an exception, then this is likely the previous day, meaning we open
             // at the beginning of the day (midnight)
             return LocalTime.MIN;
         }
         catch (DateTimeParseException e) {
-            return getTimeFromString(timeSubstring);
+            return getTimeFromString(timeString);
         }
     }
 
     private static LocalTime getClosingTime(String timeString){
-        String timeSubstring = timeString.split("-")[1].trim();
-        if (timeSubstring.equals("12:00 am")){
+        if (timeString.equals("12:00 am")){
             return LocalTime.MAX;
         }
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E");
             // Check if the string is a day of the week
-            formatter.parse(timeSubstring);
+            formatter.parse(timeString);
             // If that didn't throw an exception, then this is likely the next day, meaning we stay open
             // to the end of the day (midnight)
             return LocalTime.MAX;
         }
         catch (DateTimeParseException e){
-            return getTimeFromString(timeSubstring);
+            return getTimeFromString(timeString);
         }
     }
 
