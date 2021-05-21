@@ -2,7 +2,7 @@ package com.restaurants.models;
 
 import java.util.ArrayList;
 
-public class Restaurants {
+public class RestaurantsList {
 
     public ArrayList<Restaurant> restaurants;
 }

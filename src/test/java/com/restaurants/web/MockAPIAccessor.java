@@ -2,7 +2,7 @@ package com.restaurants.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.restaurants.models.Restaurant;
-import com.restaurants.models.Restaurants;
+import com.restaurants.models.RestaurantsList;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,8 +19,8 @@ public class MockAPIAccessor implements IAPIAccessor {
     @Override
     public ArrayList<Restaurant> getAllRestaurants() {
         try {
-            Restaurants restaurants = mapper.readValue(new File("./src/test/resources/restaurant-data.json"), Restaurants.class);
-            return restaurants.restaurants;
+            RestaurantsList restaurantsList = mapper.readValue(new File("./src/test/resources/restaurant-data.json"), RestaurantsList.class);
+            return restaurantsList.restaurants;
         } catch (IOException e) {
             e.printStackTrace();
         }

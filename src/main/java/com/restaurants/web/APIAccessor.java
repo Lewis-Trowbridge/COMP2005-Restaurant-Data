@@ -2,7 +2,7 @@ package com.restaurants.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.restaurants.models.Restaurant;
-import com.restaurants.models.Restaurants;
+import com.restaurants.models.RestaurantsList;
 
 import java.io.IOException;
 import java.net.URI;
@@ -32,8 +32,8 @@ public class APIAccessor implements IAPIAccessor {
                 .build();
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            Restaurants restaurants = mapper.readValue(response.body(), Restaurants.class);
-            return restaurants.restaurants;
+            RestaurantsList restaurantsList = mapper.readValue(response.body(), RestaurantsList.class);
+            return restaurantsList.restaurants;
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
